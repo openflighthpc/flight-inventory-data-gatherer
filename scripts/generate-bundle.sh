@@ -28,7 +28,7 @@
 #===============================================================================
 TARBALL_NAME="gather-data.tar.gz"
 SCRIPT_NAME="gather-data-bundled.sh"
-COMMAND_TO_RUN='if [ ! -z $1 ] ; then ./gather-data.sh --name $1 ; else ./gather-data.sh ; fi ; rm -rf ./gather-data.sh ./bin'
+COMMAND_TO_RUN='if [ ! -z $1 ] ; then /tmp/gather-data.sh --name $1 ; else /tmp/gather-data.sh ; fi ; rm -rf /tmp/gather-data.sh /tmp/bin'
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)
 source="${root}/src"
 
@@ -55,7 +55,7 @@ fi
 if [ -e $root/scripts/vendor/tartos/tartos.sh ] ; then
 	echo "Now creating a self extracting script..."
 	pushd $root/build > /dev/null 2>&1
-	$root/scripts/vendor/tartos/tartos.sh "$TARBALL_NAME" "$SCRIPT_NAME" "$COMMAND_TO_RUN"
+	$root/scripts/vendor/tartos/tartos.sh "$TARBALL_NAME" "$SCRIPT_NAME" "$COMMAND_TO_RUN" /tmp/
 	rm $root/build/$TARBALL_NAME
 	echo "Complete - script can now be found at $root/build/$SCRIPT_NAME"
 else
